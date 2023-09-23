@@ -1,6 +1,6 @@
 .grid {
     align-content: space-between;
-    background-image: url("assets/grid_background.jpeg");
+    background-image: url("../../assets/grid_background.jpeg");
     display: flex;
     flex-direction: row;
     flex-flow: wrap;
@@ -20,3 +20,7 @@
     height: 150px;
     width: 150px;
   }
+
+h1 {
+  color: white;
+}
