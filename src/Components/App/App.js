@@ -4,10 +4,10 @@ import Grid from '../Grid/Grid'
 
 function App() {
   return (
-    <div>
-      <Sidebar />
+    <div className="body">
+      <Sidebar player1={true} />
       <Grid />
-      <Sidebar />
+      <Sidebar player2={true} />
     </div>
   );
 }

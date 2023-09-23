@@ -1,0 +1,20 @@
+.icon {
+    height: 100px;
+    width: 85px;
+  }
+
+.player-bar {
+    background-image: url('../../assets/grid_section_background.jpeg');
+    background-size: cover;
+    height: 100vh;
+    text-align: center;
+    width: 325px;
+  }
+
+  .player-2 {
+    background-position: right;
+  }
+
+  h2 {
+    color: white;
+  }
