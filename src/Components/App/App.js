@@ -4,7 +4,7 @@ import Grid from '../Grid/Grid'
 
 function App() {
   return (
-    <div>
+    <div className="body">
       <Sidebar player1={true} />
       <Grid />
       <Sidebar player2={true} />
