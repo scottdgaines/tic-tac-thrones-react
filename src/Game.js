@@ -1,9 +1,10 @@
+import Player from './Player.js'
 class Game {
-    constuctor(player1, player2) {
-        this.player1 = new Player(player1),
-        this.player2 = new Player(player2),
-        this.currentTurn = this.player1,
-        this.occupiedTiles = [null],
+    constructor(player1, player2) {
+        this.player1 = new Player(player1);
+        this.player2 = new Player(player2);
+        this.currentTurn = this.player1;
+        this.occupiedTiles = [null];
         this.winningConditions = [
             ['1', '2', '3'],
             ['4', '5', '6'],
@@ -26,23 +27,34 @@ class Game {
         const currentTiles = this.currentTurn.tiles;
 
         conditions.forEach(condition => {
-            let index1 = conditions[indexOf(condition)][0]
-            let index2 = conditions[indexOf(condition)][1]
-            let index3 = conditions[indexOf(condition)][2]
+            let index = 0
+            let index1 = conditions[index][0]
+            let index2 = conditions[index][1]
+            let index3 = conditions[index][2]
 
             if (currentTiles.includes(index1) && currentTiles.includes(index2) && currentTiles.includes(index3)) {
                 this.currentTurn.increaseWins();
-                declareWinner();
-                updateWinDisplay();
+                this.declareWinner();
             } else if (this.occupiedTiles.length === 10 && !(currentTiles.includes(index1) && currentTiles.includes(index2) && currentTiles.includes(index3))) {
-                declareDraw()
+                this.declareDraw()
             }
+
+            index++
         })
     }
 
     resetWinCount() {
         this.player1.wins = 0;
         this.player2.wins = 0;
-        updateWinDisplay();
+    }
+
+    declareDraw = () => {
+
+    }
+  
+    declareWinner = () => {
+  
     }
 }
+
+export default Game

@@ -1,9 +1,9 @@
 class Player {
     constructor(player) {
-        this.name = player.name,
+        this.name = player.name;
         this.id = player.id;
-        this.wins = player.wins,
-        this.logo = player.logo,
+        this.wins = player.wins || 0;
+        this.logo = player.logo;
         this.tiles = []
     }
 
@@ -11,3 +11,5 @@ class Player {
         this.wins++
     }
 }
+
+export default Player
