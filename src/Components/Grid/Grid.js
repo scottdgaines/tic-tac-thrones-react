@@ -2,11 +2,20 @@ import React from 'react'
 import './Grid.css'
 
 const Grid = () => {
+
+   const placeLogo = (selection) => {
+        console.log(selection)
+    }
   return (
     <>
         <h1>Tic-Tac-Thrones</h1>
         <div className="grid"> 
-            <article className="tile t1" id="1"></article>
+            <article 
+                className="tile t1"    
+                id="1"
+                onClick={(e) => {
+                    placeLogo(e.target.id)}}
+                ></article>
             <article className="tile t2" id={2}></article>
             <article className="tile t3" id={3}></article>
             <article className="tile t4" id={4}></article>
