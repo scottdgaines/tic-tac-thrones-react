@@ -1,33 +1,18 @@
-.grid {
-    align-content: space-between;
-    background-image: url("../../assets/grid_background.jpeg");
-    display: flex;
-    flex-direction: row;
-    flex-flow: wrap;
-    height: 480px;
-    justify-content: space-between;
-    margin: auto;
-    place-self: start center;
-    width: 480px;
-    /* padding: 10px; */
-}
-
-.tile {
-    align-items: center;
-    background-color: #0D0D0D;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    height: 150px;
-    width: 150px;
-  }
-
-  .t1
-  .t4
-  .t7 {
-    margin-left: 0px
-  }
-
 h1 {
   color: white;
+}
+
+.grid {
+  align-content: space-between;
+  background-image: url("../../assets/grid_background.jpeg");
+  display: flex;
+  flex-direction: row;
+  flex-flow: wrap;
+  height: 480px;
+  justify-content: space-between;
+  margin: auto;
+  place-self: start center;
+  width: 480px;
+  /* padding: 10px; */
+  border: 2px solid yellow;
 }
