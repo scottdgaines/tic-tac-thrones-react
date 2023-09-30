@@ -1,10 +1,16 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './Tile.css'
 
-const Tile = (id) => {
+const Tile = ({ key, id, currentGame, setCurrentPlayer }) => {
+    const [playerLogo, setPlayerLogo] = useState()
 
-    const placeLogo = (selection) => {
-        console.log(selection)
+    const claimTile = (selection) => {
+        const available = currentGame.verifyTile(selection)
+        if (available) {
+            setPlayerLogo(<img src={currentGame.currentTurn.logo} className='tile-icon' />)
+            currentGame.togglePlayer()
+            setCurrentPlayer(currentGame.currentTurn.name)
+        }
     }
 
   return (
@@ -13,8 +19,10 @@ const Tile = (id) => {
             className="tile"    
             id={id}
             onClick={(e) => {
-                placeLogo(e.target.id)}}
-            ></article>
+                claimTile(e.target.id)}}
+            >
+                {playerLogo}
+            </article>
     </div>
   )
 }

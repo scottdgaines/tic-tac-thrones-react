@@ -17,9 +17,20 @@ class Game {
         ]
     }
 
-    logSelectedTile(selection) {
-        this.currentTurn.tiles.push(selection);
-        this.occupiedTiles.push(selection)
+    togglePlayer = () => {
+    if (this.currentTurn.id === this.player1.id) {
+      this.currentTurn = this.player2
+    } else if (this.currentTurn.id === this.player2.id) {
+      this.currentTurn = this.player1
+    }
+    }
+
+    verifyTile = (selection) => {
+        if (!this.occupiedTiles.includes(selection)) {
+            this.occupiedTiles.push(selection)
+            this.currentTurn.tiles.push(selection)
+            return true
+        }
     }
 
     checkWinConditions() {
