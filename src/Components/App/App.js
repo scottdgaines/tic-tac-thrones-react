@@ -18,13 +18,20 @@ function App() {
     logo: lannisterLogo
   }
   const [currentGame, setCurrentGame] = useState(new Game(player1, player2))
+  const [p1Wins, setP1Wins] = useState(0)
+  const [p2Wins, setP2Wins] = useState(0)
 
-  
+  const displayWins = () => {
+      setP1Wins(currentGame.player1.wins)
+      setP2Wins(currentGame.player2.wins)
+
+}  
+
   return (
     <div className="body">
-      <Sidebar pl1={true} currentGame={currentGame} />
-      <Grid currentGame={currentGame} />
-      <Sidebar currentGame={currentGame} />
+      <Sidebar pl1={true} currentGame={currentGame} p1Wins={p1Wins} />
+      <Grid currentGame={currentGame} displayWins={displayWins} />
+      <Sidebar currentGame={currentGame} p2Wins={p2Wins} />
     </div>
   );
 }

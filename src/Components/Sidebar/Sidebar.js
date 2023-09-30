@@ -1,11 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './Sidebar.css'
 
-const SideBar = ({ pl1, currentGame }) => {
+const SideBar = ({ pl1, currentGame, p1Wins, p2Wins }) => {
     const dynamicIcon = pl1 ? currentGame.player1.logo : currentGame.player2.logo
     const houseName = pl1 ? currentGame.player1.name : currentGame.player2.name
-    const wins = pl1 ? currentGame.player1.wins : currentGame.player2.wins
     const backgroundImage = pl1 ? "player-bar" : "player-bar player-2"
+    const wins = p1Wins ? p1Wins : p2Wins
 
     return (
         <div className={backgroundImage}>

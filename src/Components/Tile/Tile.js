@@ -1,25 +1,47 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './Tile.css'
 
-const Tile = ({ key, id, currentGame, setCurrentPlayer }) => {
+const Tile = ({ id, currentGame, setBanner, displayWins }) => {
     const [playerLogo, setPlayerLogo] = useState()
+    const [open, setOpen] = useState(true)
 
-    const claimTile = (selection) => {
-        const available = currentGame.verifyTile(selection)
-        if (available) {
-            setPlayerLogo(<img src={currentGame.currentTurn.logo} className='tile-icon' />)
-            currentGame.togglePlayer()
-            setCurrentPlayer(currentGame.currentTurn.name)
+    useEffect(() => {
+        determineLogo(id)
+    }, [])
+    
+    const determineLogo = (id) => {
+        if (currentGame.player1.tiles.includes(id)) {
+            setPlayerLogo(<img src={currentGame.player1.logo} className='tile-icon' />)
+        } else if (currentGame.player2.tiles.includes(id)) {
+            setPlayerLogo(<img src={currentGame.player2.logo} className='tile-icon' />)
+        } else {
+            setPlayerLogo(null)
         }
     }
-
+        
+    const claimTile = (id) => {
+        const available = currentGame.verifyTile(id)
+        const win = currentGame.checkWinConditions()
+        
+        if (available && !win) {
+            setOpen(false)
+            determineLogo(id)
+            currentGame.togglePlayer()
+            setBanner(`It is ${currentGame.currentTurn.name}'s Turn`)
+        } else if ( available && win) {
+            setBanner(`${currentGame.currentTurn.name} sits upon the Iron Throne`)
+            displayWins()
+        } 
+    }
+    
   return (
     <div> 
         <article
             className="tile"    
             id={id}
             onClick={(e) => {
-                claimTile(e.target.id)}}
+                if (open) {
+                claimTile(e.target.id)}}}
             >
                 {playerLogo}
             </article>
