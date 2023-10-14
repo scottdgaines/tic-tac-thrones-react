@@ -4,6 +4,8 @@ import Tile from '../Tile/Tile'
 
 const Grid = ({ currentGame, displayWins }) => {
     const [banner, setBanner] = useState(`It is ${currentGame.currentTurn.name}'s Turn`)
+    const [p1Tiles, setP1Tiles] = useState([currentGame.player1.tiles])
+    const [p2Tiles, setP2Tiles] = useState([currentGame.player2.tiles])
     //when component renders, it should be looking at each player's tiles array, and asking, for each id within these two arrays, we should render the logo to the corresponding tile
     
     const tiles = currentGame.tiles.map(id => {
@@ -13,6 +15,8 @@ const Grid = ({ currentGame, displayWins }) => {
           currentGame={currentGame} 
           setBanner={setBanner}
           displayWins={displayWins}
+          p1Tiles={p1Tiles}
+          p2Tiles={p2Tiles}
         />
     })
 

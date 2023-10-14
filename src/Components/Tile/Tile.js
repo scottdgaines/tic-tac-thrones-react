@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import './Tile.css'
 
-const Tile = ({ id, currentGame, setBanner, displayWins }) => {
+const Tile = ({ id, currentGame, setBanner, displayWins, p1Tiles, p2Tiles }) => {
     const [playerLogo, setPlayerLogo] = useState()
     const [open, setOpen] = useState(true)
 

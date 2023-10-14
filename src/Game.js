@@ -35,11 +35,9 @@ class Game {
     }
 
     verifyTile = (selection) => {
-        console.log(this.occupiedTiles)
         if (!this.occupiedTiles.includes(selection)) {
             this.occupiedTiles.push(selection)
             this.currentTurn.tiles.push(selection)
-            console.log(this.occupiedTiles)
             return true
         }
     }
