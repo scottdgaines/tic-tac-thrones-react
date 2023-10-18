@@ -6,17 +6,6 @@ import Game from '../../Game'
 import { player1, player2 } from '../../players'
 
 function App() {
-  // const player1 = {
-  //   name: 'House Stark',
-  //   id: 'one',
-  //   logo: starkLogo
-  // }
-  // const player2 = {
-  //   name: 'House Lannister',
-  //   id: 'two',
-  //   logo: lannisterLogo
-  // }
-
   const [currentGame, setCurrentGame] = useState(new Game(player1, player2))
   const [p1Wins, setP1Wins] = useState(0)
   const [p2Wins, setP2Wins] = useState(0)

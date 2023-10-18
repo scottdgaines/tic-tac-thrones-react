@@ -6,7 +6,14 @@ import { player1, player2 } from '../../players'
 
 const Grid = ({ currentGame, updateWins, setCurrentGame }) => {
     const [banner, setBanner] = useState(`It is ${currentGame.currentTurn.name}'s Turn`)
-    const [gameTiles, setGameTiles] = useState(currentGame.occupiedTiles)
+    const [occupiedTiles, setOccupiedTiles] = useState(currentGame.occupiedTiles)
+
+    const resetRound = () => {
+      currentGame.resetRound()
+      setOccupiedTiles(currentGame.occupiedTiles)
+      setBanner(`It is ${currentGame.currentTurn.name}'s Turn`)
+      console.log('after reset', currentGame, occupiedTiles)
+    }
     
     const tiles = currentGame.tileIDs.map(id => {
         return <Tile 
@@ -15,19 +22,20 @@ const Grid = ({ currentGame, updateWins, setCurrentGame }) => {
           currentGame={currentGame} 
           setBanner={setBanner}
           updateWins={updateWins}
+          resetRound={resetRound}
+          occupiedTiles={occupiedTiles}
         />
     })
 
-    const declareReset = () => {
+    const declareNewGame = () => {
       setBanner('Winter is Coming')
       setTimeout(resetGame, 3000)
     }
 
     const resetGame = () => {
       setCurrentGame(new Game(player1, player2))
-      currentGame.resetTiles()
       currentGame.togglePlayer()
-      setGameTiles([currentGame.occupiedTiles])
+      setOccupiedTiles([currentGame.occupiedTiles])
       setBanner(`It is ${currentGame.currentTurn.name}'s Turn`)
       updateWins()
     }
@@ -38,7 +46,7 @@ const Grid = ({ currentGame, updateWins, setCurrentGame }) => {
         <h2>{banner}</h2>
         <span className='grid'>
             {tiles}
-            <button onClick={declareReset}>Winter is Coming</button>
+            <button onClick={declareNewGame}>Winter is Coming</button>
         </span>
     </div>
   )
