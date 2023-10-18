@@ -1,22 +1,31 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import './Tile.css'
 
-const Tile = ({ id, currentGame, setBanner, displayWins }) => {
+const Tile = ({ id, currentGame, setBanner, updateWins, resetRound, occupiedTiles }) => {
     const [playerLogo, setPlayerLogo] = useState()
-    const [open, setOpen] = useState(true)
-
-    useEffect(() => {
-        determineLogo(id)
-    }, [])
     
-    const determineLogo = (id) => {
-        if (currentGame.player1.tiles.includes(id)) {
+    const placeLogo = () => {
+        if (currentGame.currentTurn === currentGame.player1) {
             setPlayerLogo(<img src={currentGame.player1.logo} className='tile-icon' />)
-        } else if (currentGame.player2.tiles.includes(id)) {
-            setPlayerLogo(<img src={currentGame.player2.logo} className='tile-icon' />)
         } else {
-            setPlayerLogo(null)
-        }
+            setPlayerLogo(<img src={currentGame.player2.logo} className='tile-icon' />)
+        } 
+    }
+
+    const changeTurn = () => {
+        currentGame.togglePlayer()
+        setBanner(`It is ${currentGame.currentTurn.name}'s Turn`)
+    }
+
+    const resetLogo = () => {
+        setPlayerLogo()
+    }
+
+    const declareWin = () => {
+        setBanner(`${currentGame.currentTurn.name} sits upon the Iron Throne`)
+        updateWins()
+        setTimeout(resetRound, 3000)
+        setTimeout(resetLogo, 3000)
     }
         
     const claimTile = (id) => {
@@ -24,13 +33,11 @@ const Tile = ({ id, currentGame, setBanner, displayWins }) => {
         const win = currentGame.checkWinConditions()
         
         if (available && !win) {
-            setOpen(false)
-            determineLogo(id)
-            currentGame.togglePlayer()
-            setBanner(`It is ${currentGame.currentTurn.name}'s Turn`)
+            placeLogo()
+            changeTurn()
         } else if ( available && win) {
-            setBanner(`${currentGame.currentTurn.name} sits upon the Iron Throne`)
-            displayWins()
+            placeLogo()
+            declareWin()
         } 
     }
     
@@ -40,8 +47,7 @@ const Tile = ({ id, currentGame, setBanner, displayWins }) => {
             className="tile"    
             id={id}
             onClick={(e) => {
-                if (open) {
-                claimTile(e.target.id)}}}
+                claimTile(e.target.id)}}
             >
                 {playerLogo}
             </article>

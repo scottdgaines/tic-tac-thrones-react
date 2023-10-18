@@ -4,8 +4,8 @@ class Game {
         this.player1 = new Player(player1);
         this.player2 = new Player(player2);
         this.currentTurn = this.player1;
-        this.tiles = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-        this.occupiedTiles = [null];
+        this.tileIDs = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+        this.occupiedTiles = [];
         this.winningConditions = [
             ['1', '2', '3'],
             ['4', '5', '6'],
@@ -18,14 +18,17 @@ class Game {
         ]
     }
 
-    resetTiles = () => {
-        this.occupiedTiles = [null]
+    resetRound = () => {
         this.player1.tiles = []
         this.player2.tiles = []
-        this.player1.wins = 0
-        this.player2.wins = 0
+        this.concatOccupiedTiles()
+        this.togglePlayer()
     }
 
+    concatOccupiedTiles = () => {
+        this.occupiedTiles = this.player1.tiles.concat(this.player2.tiles)
+    }
+    
     togglePlayer = () => {
         if (this.currentTurn.id === this.player1.id) {
         this.currentTurn = this.player2
@@ -35,13 +38,17 @@ class Game {
     }
 
     verifyTile = (selection) => {
-        console.log(this.occupiedTiles)
-        if (!this.occupiedTiles.includes(selection)) {
-            this.occupiedTiles.push(selection)
-            this.currentTurn.tiles.push(selection)
-            console.log(this.occupiedTiles)
+        if (!this.occupiedTiles.includes(selection) && selection != '') {
+            this.addTile(selection)
             return true
+        } else {
+            return false
         }
+    }
+    
+    addTile = (selection) => {
+        this.currentTurn.tiles.push(selection)
+        this.concatOccupiedTiles()
     }
 
     checkWinConditions = () => {
@@ -62,12 +69,6 @@ class Game {
           }
         }
     }
-
-    resetWinCount() {
-        this.player1.wins = 0;
-        this.player2.wins = 0;
-    }
-
 }
 
 export default Game
