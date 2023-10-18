@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import './Tile.css'
 
-const Tile = ({ id, currentGame, setBanner, displayWins, p1Tiles, p2Tiles }) => {
+const Tile = ({ id, currentGame, setBanner, updateWins }) => {
     const [playerLogo, setPlayerLogo] = useState()
-    const [open, setOpen] = useState(true)
+    const [available, setAvailable] = useState(true)
 
     useEffect(() => {
         determineLogo(id)
@@ -24,13 +24,13 @@ const Tile = ({ id, currentGame, setBanner, displayWins, p1Tiles, p2Tiles }) => 
         const win = currentGame.checkWinConditions()
         
         if (available && !win) {
-            setOpen(false)
+            setAvailable(false)
             determineLogo(id)
             currentGame.togglePlayer()
             setBanner(`It is ${currentGame.currentTurn.name}'s Turn`)
         } else if ( available && win) {
             setBanner(`${currentGame.currentTurn.name} sits upon the Iron Throne`)
-            displayWins()
+            updateWins()
         } 
     }
     
@@ -40,7 +40,7 @@ const Tile = ({ id, currentGame, setBanner, displayWins, p1Tiles, p2Tiles }) => 
             className="tile"    
             id={id}
             onClick={(e) => {
-                if (open) {
+                if (available) {
                 claimTile(e.target.id)}}}
             >
                 {playerLogo}

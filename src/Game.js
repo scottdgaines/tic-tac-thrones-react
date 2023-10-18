@@ -4,7 +4,7 @@ class Game {
         this.player1 = new Player(player1);
         this.player2 = new Player(player2);
         this.currentTurn = this.player1;
-        this.tiles = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+        this.tileIDs = [1, 2, 3, 4, 5, 6, 7, 8, 9]
         this.occupiedTiles = [null];
         this.winningConditions = [
             ['1', '2', '3'],
