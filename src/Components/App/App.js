@@ -7,15 +7,13 @@ import { player1, player2 } from '../../players'
 
 function App() {
   const [currentGame, setCurrentGame] = useState(new Game(player1, player2))
-  const [p1Wins, setP1Wins] = useState(0)
-  const [p2Wins, setP2Wins] = useState(0)
+  const [p1Wins, setP1Wins] = useState(currentGame.player1.wins)
+  const [p2Wins, setP2Wins] = useState(currentGame.player2.wins)
 
   const updateWins = () => {
       setP1Wins(currentGame.player1.wins)
       setP2Wins(currentGame.player2.wins)
 }  
-
-console.log(currentGame)
 
   return (
     <div className="body">

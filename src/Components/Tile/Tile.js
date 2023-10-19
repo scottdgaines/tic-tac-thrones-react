@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
 import './Tile.css'
 
-const Tile = ({ id, currentGame, setBanner, updateWins, resetRound, occupiedTiles }) => {
+const Tile = ({ id, currentGame, setBanner, updateWins, resetRound }) => {
     const [playerLogo, setPlayerLogo] = useState()
     
     const placeLogo = () => {
         if (currentGame.currentTurn === currentGame.player1) {
             setPlayerLogo(<img src={currentGame.player1.logo} className='tile-icon' />)
-        } else {
+        } else if (currentGame.currentTurn === currentGame.player2) {
             setPlayerLogo(<img src={currentGame.player2.logo} className='tile-icon' />)
         } 
     }
@@ -41,18 +41,18 @@ const Tile = ({ id, currentGame, setBanner, updateWins, resetRound, occupiedTile
         } 
     }
     
-  return (
-    <div> 
-        <article
-            className="tile"    
-            id={id}
-            onClick={(e) => {
-                claimTile(e.target.id)}}
-            >
-                {playerLogo}
-            </article>
-    </div>
-  )
+    return (
+        <div> 
+            <article
+                className="tile"    
+                id={id}
+                onClick={(e) => {
+                    claimTile(e.target.id)}}
+                >
+                    {playerLogo}
+                </article>
+        </div>
+    )
 }
 
 export default Tile
