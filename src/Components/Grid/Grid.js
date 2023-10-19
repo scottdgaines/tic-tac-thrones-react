@@ -1,4 +1,4 @@
-import React, { useState} from 'react'
+import React, { useEffect, useState } from 'react'
 import './Grid.css'
 import Tile from '../Tile/Tile'
 import Game from '../../Game'
@@ -6,28 +6,31 @@ import { player1, player2 } from '../../players'
 
 const Grid = ({ currentGame, updateWins, setCurrentGame }) => {
     const [banner, setBanner] = useState(`It is ${currentGame.currentTurn.name}'s Turn`)
-    const [occupiedTiles, setOccupiedTiles] = useState(currentGame.occupiedTiles)
 
     const resetRound = () => {
       currentGame.resetRound()
-      setOccupiedTiles(currentGame.occupiedTiles)
       setBanner(`It is ${currentGame.currentTurn.name}'s Turn`)
-      console.log('after reset', currentGame, occupiedTiles)
+      setTiles(renderTiles())
+      console.log(tiles)
     }
     
-    const tiles = currentGame.tileIDs.map(id => {
+    const renderTiles = () => {
+     return currentGame.tileIDs.map(id => {
+        
         return <Tile 
-          key={id} 
-          id={id}
-          currentGame={currentGame} 
-          setBanner={setBanner}
-          updateWins={updateWins}
-          resetRound={resetRound}
-          occupiedTiles={occupiedTiles}
+        key={id} 
+        id={id}
+        currentGame={currentGame} 
+        setBanner={setBanner}
+        updateWins={updateWins}
+        resetRound={resetRound}
         />
-    })
+      }) 
+    }
 
-    const declareNewGame = () => {
+    const [tiles, setTiles] = useState(renderTiles())
+
+    const prepNewGame = () => {
       setBanner('Winter is Coming')
       setTimeout(resetGame, 3000)
     }
@@ -35,9 +38,9 @@ const Grid = ({ currentGame, updateWins, setCurrentGame }) => {
     const resetGame = () => {
       setCurrentGame(new Game(player1, player2))
       currentGame.togglePlayer()
-      setOccupiedTiles([currentGame.occupiedTiles])
       setBanner(`It is ${currentGame.currentTurn.name}'s Turn`)
       updateWins()
+      setTiles(renderTiles())
     }
 
   return (
@@ -46,7 +49,7 @@ const Grid = ({ currentGame, updateWins, setCurrentGame }) => {
         <h2>{banner}</h2>
         <span className='grid'>
             {tiles}
-            <button onClick={declareNewGame}>Winter is Coming</button>
+            <button onClick={prepNewGame}>New Game</button>
         </span>
     </div>
   )

@@ -16,6 +16,7 @@ const SideBar = ({ pl1, currentGame, p1Wins, p2Wins }) => {
     }
     
     const pluralReigns = checkPlurality()
+
     return (
         <div className={backgroundImage}>
             <h2>{houseName}</h2>
